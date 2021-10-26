@@ -2,7 +2,8 @@
   "kind": "collectionType",
   "collectionName": "items",
   "info": {
-    "name": "Item"
+    "name": "Item",
+    "description": ""
   },
   "options": {
     "increments": true,
@@ -11,9 +12,6 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "Name": {
-      "type": "string"
-    },
     "startPrice": {
       "type": "float"
     },
@@ -23,32 +21,14 @@
     "maxPrice": {
       "type": "float"
     },
-    "Image": {
-      "collection": "file",
-      "via": "related",
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos"
-      ],
-      "plugin": "upload",
-      "required": false,
-      "pluginOptions": {}
-    },
     "ownerID": {
       "type": "richtext"
     },
     "rating": {
       "type": "float"
     },
-    "currentBuyerID": {
+    "currentOrderId": {
       "type": "string"
-    },
-    "postTime": {
-      "type": "datetime"
-    },
-    "endTime": {
-      "type": "datetime"
     },
     "categoryID": {
       "type": "string"
@@ -58,6 +38,15 @@
     },
     "status": {
       "type": "string"
+    },
+    "images": {
+      "type": "json"
+    },
+    "title": {
+      "type": "string"
+    },
+    "view": {
+      "type": "integer"
     }
   }
 }
