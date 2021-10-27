@@ -10,6 +10,22 @@
     },
     {
       "method": "GET",
+      "path": "/items/sub-category/:subId/page/:pageNumber",
+      "handler": "item.findBySubCategory",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/items/sub-category/:subId/count",
+      "handler": "item.getCountBySub",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
       "path": "/items/count",
       "handler": "item.count",
       "config": {

@@ -21,9 +21,6 @@
     "maxPrice": {
       "type": "float"
     },
-    "ownerID": {
-      "type": "richtext"
-    },
     "rating": {
       "type": "float"
     },
@@ -47,6 +44,15 @@
     },
     "view": {
       "type": "integer"
+    },
+    "subCategoryId": {
+      "type": "string"
+    },
+    "postingDate": {
+      "type": "datetime"
+    },
+    "ownerId": {
+      "type": "string"
     }
   }
 }

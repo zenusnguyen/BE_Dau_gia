@@ -20,4 +20,22 @@ module.exports = {
       sanitizeEntity(entity, { model: strapi.models.item })
     );
   },
+  async findBySubCategory(ctx) {
+    const { subId, pageNumber } = ctx.params;
+    const entity = await strapi.services.item.find({
+      subCategoryId: subId,
+      _limit: 2,
+      _start: 2 * (pageNumber - 1),
+    });
+
+    return sanitizeEntity(entity, { model: strapi.models.item });
+  },
+  async getCountBySub(ctx) {
+    const { subId } = ctx.params;
+    const entity = await strapi.services.item.count({
+      subCategoryId: subId,
+    });
+
+    return sanitizeEntity(entity, { model: strapi.models.item });
+  },
 };
