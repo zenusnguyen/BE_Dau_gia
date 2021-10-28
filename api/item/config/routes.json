@@ -18,6 +18,22 @@
     },
     {
       "method": "GET",
+      "path": "/items/search/:searchWord/page/:pageNumber",
+      "handler": "item.search",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/items/search/:searchWord/count",
+      "handler": "item.getCountSearch",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
       "path": "/items/sub-category/:subId/count",
       "handler": "item.getCountBySub",
       "config": {

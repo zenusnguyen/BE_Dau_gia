@@ -20,6 +20,7 @@ module.exports = {
       sanitizeEntity(entity, { model: strapi.models.item })
     );
   },
+
   async findBySubCategory(ctx) {
     const { subId, pageNumber } = ctx.params;
     const entity = await strapi.services.item.find({
@@ -37,5 +38,16 @@ module.exports = {
     });
 
     return sanitizeEntity(entity, { model: strapi.models.item });
+  },
+
+  async search(ctx) {
+    const { searchWord } = ctx.params;
+    const entity = {};
+    return sanitizeEntity(entity, { model: strapi.models.item });
+  },
+
+  async getCountSearch(ctx) {
+    const { searchWord } = ctx.params;
+    return sanitizeEntity(length, { model: strapi.models.item });
   },
 };
