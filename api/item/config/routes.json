@@ -34,6 +34,30 @@
     },
     {
       "method": "GET",
+      "path": "/items/view/desc",
+      "handler": "item.findSortDescView",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/items/price/desc",
+      "handler": "item.findSortDescPrice",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/items/post-date/asc",
+      "handler": "item.findSortAscPostDate",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
       "path": "/items/sub-category/:subId/count",
       "handler": "item.getCountBySub",
       "config": {

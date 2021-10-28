@@ -21,6 +21,30 @@ module.exports = {
     );
   },
 
+  async findSortDescView(ctx) {
+    const entity = await strapi.services.item.search({
+      _limit: 5,
+      _sort: "view:desc",
+    });
+    return sanitizeEntity(entity, { model: strapi.models.item });
+  },
+
+  async findSortDescPrice(ctx) {
+    const entity = await strapi.services.item.search({
+      _limit: 5,
+      _sort: "currentPrice:desc",
+    });
+    return sanitizeEntity(entity, { model: strapi.models.item });
+  },
+
+  async findSortAscPostDate(ctx) {
+    const entity = await strapi.services.item.search({
+      _limit: 5,
+      _sort: "postingDate:asc",
+    });
+    return sanitizeEntity(entity, { model: strapi.models.item });
+  },
+
   async findBySubCategory(ctx) {
     const { subId, pageNumber } = ctx.params;
     const entity = await strapi.services.item.find({
