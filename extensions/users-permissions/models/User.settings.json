@@ -64,6 +64,12 @@
     },
     "type": {
       "type": "string"
+    },
+    "fullName": {
+      "type": "string"
+    },
+    "score": {
+      "type": "integer"
     }
   }
 }

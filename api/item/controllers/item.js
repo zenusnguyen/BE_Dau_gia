@@ -21,6 +21,28 @@ module.exports = {
     );
   },
 
+  async findOne(ctx) {
+    const { id } = ctx.params;
+    const entity = await strapi.services.item.findOne({
+      id: id,
+    });
+    const seller = await strapi.query("user", "users-permissions").findOne({
+      id: entity.seller.id,
+    });
+    const bidder = await strapi.query("user", "users-permissions").findOne({
+      id: entity.currentBidder.id,
+    });
+    const products = await strapi.services.item.find({
+      id_nin: [id],
+      subCategoryId: entity.subCategoryId,
+      _limit: 5,
+    });
+    entity.seller.score = seller.score;
+    entity.currentBidder.score = bidder.score;
+    entity.products = products;
+    return entity;
+  },
+
   async findSortDescView(ctx) {
     const entity = await strapi.services.item.search({
       _limit: 5,

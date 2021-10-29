@@ -53,6 +53,12 @@
     },
     "ownerId": {
       "type": "string"
+    },
+    "seller": {
+      "type": "json"
+    },
+    "currentBidder": {
+      "type": "json"
     }
   }
 }
