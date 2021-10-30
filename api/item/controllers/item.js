@@ -59,6 +59,62 @@ module.exports = {
     return entity;
   },
 
+  async findAllSellProcessing(ctx) {
+    const { sellerId } = ctx.params;
+
+    const entity = await strapi.query("item").model.find({
+      "seller.id": sellerId,
+      status: "processing",
+    });
+
+    return entity;
+  },
+
+  async findAllSellSold(ctx) {
+    const { sellerId } = ctx.params;
+
+    const entity = await strapi.query("item").model.find({
+      "seller.id": sellerId,
+      status: "sold",
+    });
+
+    return entity;
+  },
+
+  async findAllAuctionProcessing(ctx) {
+    const { bidderId } = ctx.params;
+
+    const allHistory = await strapi.query("price-history").model.find({
+      "buyer.id": bidderId,
+    });
+
+    const productsId = [];
+
+    allHistory.map((history) => {
+      if (!productsId.includes(history.productId)) {
+        productsId.push(history.productId);
+      }
+    });
+
+    const entity = await strapi.services.item.find({
+      id_in: productsId,
+      status: "processing",
+    });
+
+    return entity;
+  },
+
+  async findAllAuctionSold(ctx) {
+    const { bidderId } = ctx.params;
+
+    const entity = await strapi.query("item").model.find({
+      "currentBidder.id": bidderId,
+      status: "sold",
+    });
+
+    return entity;
+  },
+
   async findSortDescView(ctx) {
     const entity = await strapi.services.item.search({
       _limit: 5,

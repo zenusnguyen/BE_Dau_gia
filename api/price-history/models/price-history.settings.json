@@ -18,7 +18,7 @@
     "price": {
       "type": "integer"
     },
-    "bidder": {
+    "buyer": {
       "type": "json"
     },
     "productId": {
