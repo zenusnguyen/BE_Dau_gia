@@ -43,6 +43,22 @@ module.exports = {
     return entity;
   },
 
+  async findAllLike(ctx) {
+    const { bidderId } = ctx.params;
+    const allWatch = await strapi.services.watch.find({
+      bidderId: bidderId,
+    });
+    const productsId = allWatch.map((watch) => watch.productId);
+    const products = await strapi.services.item.find({
+      id_in: productsId,
+    });
+    const entity = products.map((product) => {
+      return { ...product, isLike: true };
+    });
+
+    return entity;
+  },
+
   async findSortDescView(ctx) {
     const entity = await strapi.services.item.search({
       _limit: 5,
@@ -77,6 +93,7 @@ module.exports = {
 
     return sanitizeEntity(entity, { model: strapi.models.item });
   },
+
   async getCountBySub(ctx) {
     const { subId } = ctx.params;
     const entity = await strapi.services.item.count({

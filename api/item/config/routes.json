@@ -81,6 +81,14 @@
       }
     },
     {
+      "method": "GET",
+      "path": "/items/like/:bidderId",
+      "handler": "item.findAllLike",
+      "config": {
+        "policies": []
+      }
+    },
+    {
       "method": "POST",
       "path": "/items",
       "handler": "item.create",

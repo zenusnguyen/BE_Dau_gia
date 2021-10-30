@@ -1,9 +1,8 @@
 {
   "kind": "collectionType",
-  "collectionName": "price_histories",
+  "collectionName": "watches",
   "info": {
-    "name": "PriceHistory",
-    "description": ""
+    "name": "watch"
   },
   "options": {
     "increments": true,
@@ -12,14 +11,8 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "time": {
-      "type": "datetime"
-    },
-    "price": {
-      "type": "integer"
-    },
-    "bidder": {
-      "type": "json"
+    "bidderId": {
+      "type": "string"
     },
     "productId": {
       "type": "string"
