@@ -8,7 +8,6 @@ const { parseMultipartData, sanitizeEntity } = require("strapi-utils");
 
 module.exports = {
   async find(ctx) {
-    // console.log("ctx: ", ctx);
     let entities;
     if (ctx.query._q) {
       entities = await strapi.services.category.search(ctx.query);

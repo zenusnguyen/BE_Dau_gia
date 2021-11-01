@@ -23,6 +23,9 @@
     },
     "productId": {
       "type": "string"
+    },
+    "bidderId": {
+      "type": "string"
     }
   }
 }
