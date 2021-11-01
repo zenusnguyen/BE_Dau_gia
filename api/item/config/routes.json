@@ -10,14 +10,6 @@
     },
     {
       "method": "GET",
-      "path": "/items/sub-category/:subId/page/:pageNumber",
-      "handler": "item.findBySubCategory",
-      "config": {
-        "policies": []
-      }
-    },
-    {
-      "method": "GET",
       "path": "/items/search/:searchWord/page/:pageNumber",
       "handler": "item.search",
       "config": {
@@ -34,38 +26,6 @@
     },
     {
       "method": "GET",
-      "path": "/items/view/desc",
-      "handler": "item.findSortDescView",
-      "config": {
-        "policies": []
-      }
-    },
-    {
-      "method": "GET",
-      "path": "/items/price/desc",
-      "handler": "item.findSortDescPrice",
-      "config": {
-        "policies": []
-      }
-    },
-    {
-      "method": "GET",
-      "path": "/items/post-date/asc",
-      "handler": "item.findSortAscPostDate",
-      "config": {
-        "policies": []
-      }
-    },
-    {
-      "method": "GET",
-      "path": "/items/sub-category/:subId/count",
-      "handler": "item.getCountBySub",
-      "config": {
-        "policies": []
-      }
-    },
-    {
-      "method": "GET",
       "path": "/items/count",
       "handler": "item.count",
       "config": {
@@ -76,46 +36,6 @@
       "method": "GET",
       "path": "/items/:id",
       "handler": "item.findOne",
-      "config": {
-        "policies": []
-      }
-    },
-    {
-      "method": "GET",
-      "path": "/items/like/:bidderId",
-      "handler": "item.findAllLike",
-      "config": {
-        "policies": []
-      }
-    },
-    {
-      "method": "GET",
-      "path": "/items/auction/processing/:bidderId",
-      "handler": "item.findAllAuctionProcessing",
-      "config": {
-        "policies": []
-      }
-    },
-    {
-      "method": "GET",
-      "path": "/items/auction/sold/:bidderId",
-      "handler": "item.findAllAuctionSold",
-      "config": {
-        "policies": []
-      }
-    },
-    {
-      "method": "GET",
-      "path": "/items/sell/processing/:sellerId",
-      "handler": "item.findAllSellProcessing",
-      "config": {
-        "policies": []
-      }
-    },
-    {
-      "method": "GET",
-      "path": "/items/sell/sold/:sellerId",
-      "handler": "item.findAllSellSold",
       "config": {
         "policies": []
       }

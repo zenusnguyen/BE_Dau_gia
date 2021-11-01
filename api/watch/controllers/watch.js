@@ -17,16 +17,6 @@ module.exports = {
     return entity;
   },
 
-  async findByBidder(ctx) {
-    const { bidderId } = ctx.params;
-
-    const entity = await strapi.services.watch.find({
-      bidderId: bidderId,
-    });
-
-    return entity;
-  },
-
   async delete(ctx) {
     const { bidderId, productId } = ctx.params;
 

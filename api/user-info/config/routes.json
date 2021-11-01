@@ -2,48 +2,48 @@
   "routes": [
     {
       "method": "GET",
-      "path": "/watches",
-      "handler": "watch.find",
+      "path": "/user-infos",
+      "handler": "user-info.find",
       "config": {
         "policies": []
       }
     },
     {
       "method": "GET",
-      "path": "/watches/count",
-      "handler": "watch.count",
+      "path": "/user-infos/count",
+      "handler": "user-info.count",
       "config": {
         "policies": []
       }
     },
     {
       "method": "GET",
-      "path": "/watches/:id",
-      "handler": "watch.findOne",
+      "path": "/user-infos/:id",
+      "handler": "user-info.findOne",
       "config": {
         "policies": []
       }
     },
     {
       "method": "POST",
-      "path": "/watches",
-      "handler": "watch.create",
+      "path": "/user-infos",
+      "handler": "user-info.create",
       "config": {
         "policies": []
       }
     },
     {
       "method": "PUT",
-      "path": "/watches/:id",
-      "handler": "watch.update",
+      "path": "/user-infos/:id",
+      "handler": "user-info.update",
       "config": {
         "policies": []
       }
     },
     {
       "method": "DELETE",
-      "path": "/watches/:productId/:bidderId",
-      "handler": "watch.delete",
+      "path": "/user-infos/:id",
+      "handler": "user-info.delete",
       "config": {
         "policies": []
       }

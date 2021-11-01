@@ -54,11 +54,11 @@
     "ownerId": {
       "type": "string"
     },
-    "seller": {
-      "type": "json"
+    "sellerId": {
+      "type": "string"
     },
-    "currentBidder": {
-      "type": "json"
+    "currentBidderId": {
+      "type": "string"
     }
   }
 }
