@@ -41,6 +41,14 @@
       }
     },
     {
+      "method": "PUT",
+      "path": "/user-infos",
+      "handler": "user-info.updatePassword",
+      "config": {
+        "policies": []
+      }
+    },
+    {
       "method": "DELETE",
       "path": "/user-infos/:id",
       "handler": "user-info.delete",

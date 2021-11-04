@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/evaluates",
+      "handler": "evaluate.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/evaluates/count",
+      "handler": "evaluate.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/evaluates/:id",
+      "handler": "evaluate.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/evaluates",
+      "handler": "evaluate.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/evaluates/:id",
+      "handler": "evaluate.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/evaluates/:id",
+      "handler": "evaluate.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}
