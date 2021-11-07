@@ -88,9 +88,6 @@ module.exports = {
       password: newPassword,
     });
 
-    console.log(user.id);
-    console.log(newPassword);
-
     const entry = await strapi
       .query("user", "users-permissions")
       .update({ id: user.id }, { password });
