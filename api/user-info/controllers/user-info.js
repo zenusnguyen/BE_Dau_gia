@@ -10,6 +10,31 @@ const formatError = (error) => [
   { messages: [{ id: error.id, message: error.message, field: error.field }] },
 ];
 module.exports = {
+  async find(ctx) {
+    let users;
+    if (ctx.query._q) {
+      users = await strapi.query("user", "users-permissions").search(ctx.query);
+    } else {
+      users = await strapi
+        .query("user", "users-permissions")
+        .find(ctx.query || {});
+    }
+
+    const entities = users.map((user) => {
+      return {
+        userId: user.id,
+        username: user.username,
+        email: user.email,
+        score: user.score,
+        dateOfBirth: user.dateOfBirth,
+      };
+    });
+
+    return entities.map((entity) =>
+      sanitizeEntity(entity, { model: strapi.query("user-info").model })
+    );
+  },
+
   async findOne(ctx) {
     const { id } = ctx.params;
 
@@ -19,13 +44,56 @@ module.exports = {
 
     const entity = {
       userId: user.id,
-      fullName: user.fullName,
+      username: user.username,
+      email: user.email,
       score: user.score,
-      birthDay: user.dateOfBirth,
+      dateOfBirth: user.dateOfBirth,
     };
 
     return sanitizeEntity(entity, { model: strapi.query("user-info").model });
   },
+
+  // async create(ctx) {
+  //   const existingEntry = await strapi
+  //     .query("user", "users-permissions")
+  //     .findOne({ email: ctx.request.body.email });
+
+  //   if (existingEntry) {
+  //     return ctx.badRequest(
+  //       null,
+  //       formatError({
+  //         id: "Auth.form.error.valid",
+  //         message: "Email already exists",
+  //         field: "email",
+  //       })
+  //     );
+  //   }
+
+  //   console.log(ctx.request.body);
+
+  //   const validData = await strapi.entityValidator.validateEntityUpdate(
+  //     strapi.query("user", "users-permissions").model,
+  //     ctx.request.body
+  //   );
+
+  //   console.log(validData);
+
+  //   if (!validData) {
+  //     return ctx.badRequest(
+  //       null,
+  //       formatError({
+  //         id: "Auth.form.error.invalid",
+  //         message: "Info invalid.",
+  //       })
+  //     );
+  //   }
+
+  //   const entry = await strapi
+  //     .query("user", "users-permissions")
+  //     .create(validData);
+
+  //   return entry;
+  // },
 
   async update(ctx) {
     const existingEntry = await strapi

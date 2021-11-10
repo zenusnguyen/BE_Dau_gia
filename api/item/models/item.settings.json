@@ -54,9 +54,6 @@
     "ownerId": {
       "type": "string"
     },
-    "sellerId": {
-      "type": "string"
-    },
     "currentBidderId": {
       "type": "string"
     }

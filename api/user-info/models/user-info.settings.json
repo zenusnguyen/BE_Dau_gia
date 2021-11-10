@@ -2,7 +2,8 @@
   "kind": "collectionType",
   "collectionName": "user_infos",
   "info": {
-    "name": "UserInfo"
+    "name": "UserInfo",
+    "description": ""
   },
   "options": {
     "increments": true,
@@ -14,11 +15,17 @@
     "userId": {
       "type": "string"
     },
-    "fullName": {
-      "type": "string"
-    },
     "score": {
       "type": "integer"
+    },
+    "username": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string"
+    },
+    "dateOfBirth": {
+      "type": "date"
     }
   }
 }
