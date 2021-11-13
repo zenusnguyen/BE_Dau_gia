@@ -12,9 +12,6 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "startPrice": {
-      "type": "float"
-    },
     "currentPrice": {
       "type": "float"
     },
@@ -39,9 +36,6 @@
     "images": {
       "type": "json"
     },
-    "title": {
-      "type": "string"
-    },
     "view": {
       "type": "integer"
     },
@@ -56,6 +50,19 @@
     },
     "currentBidderId": {
       "type": "string"
+    },
+    "autoRenew": {
+      "type": "boolean"
+    },
+    "isAllUser": {
+      "type": "boolean"
+    },
+    "priceStep": {
+      "type": "float"
+    },
+    "hasAutoAuction": {
+      "type": "boolean",
+      "default": false
     }
   }
 }

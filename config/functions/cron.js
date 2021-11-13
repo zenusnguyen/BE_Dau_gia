@@ -31,23 +31,26 @@ module.exports = {
     //   }
     // });
 
-    const products = await strapi.services.item.find();
+    const products = await strapi.services.item.find({
+      status: "processing",
+    });
+    console.log("products: ", products);
 
-    Promise.all(
-      products.map(async (el) => {
-        const expiredDate = new Date(
-          el.createdAt.setDate(el.createdAt?.getDate() + 7)
-        );
-        console.log("expiredDate: ", expiredDate);
-        console.log("new Date(): ", new Date());
-        if (new Date() < expiredDate) {
-          console.log("expired");
-          await strapi.services.item.update(
-            { id: el.id },
-            { status: "expired" }
-          );
-        }
-      })
-    );
+    //   Promise.all(
+    //     products.map(async (el) => {
+    //       const expiredDate = new Date(
+    //         el.createdAt.setDate(el.createdAt?.getDate() + 7)
+    //       );
+    //       console.log("expiredDate: ", expiredDate);
+    //       console.log("new Date(): ", new Date());
+    //       if (new Date() < expiredDate) {
+    //         console.log("expired");
+    //         await strapi.services.item.update(
+    //           { id: el.id },
+    //           { status: "expired" }
+    //         );
+    //       }
+    //     })
+    //   );
   },
 };

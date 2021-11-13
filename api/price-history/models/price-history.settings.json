@@ -18,13 +18,19 @@
     "price": {
       "type": "integer"
     },
-    "buyer": {
-      "type": "json"
-    },
     "productId": {
       "type": "string"
     },
     "bidderId": {
+      "type": "string"
+    },
+    "buyer": {
+      "type": "string"
+    },
+    "buyerName": {
+      "type": "string"
+    },
+    "type": {
       "type": "string"
     }
   }
