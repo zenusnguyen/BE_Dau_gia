@@ -18,7 +18,7 @@
     "buyerId": {
       "type": "string"
     },
-    "stepPrice": {
+    "priceStep": {
       "type": "float"
     },
     "status": {
