@@ -20,10 +20,8 @@ module.exports = () => {
   });
 
   io.on("connection", function (socket) {
-    socket.on("join", ({ username, room }) => {
-      console.log("user connected");
-      console.log("username is ", username);
-      console.log("room is...", room);
+    socket.on("priceChange", (data) => {
+      socket.broadcast.emit("priceChange", { data });
     });
   });
 };

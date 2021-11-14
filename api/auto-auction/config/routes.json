@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/auto-auctions",
+      "handler": "auto-auction.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/auto-auctions/count",
+      "handler": "auto-auction.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/auto-auctions/:id",
+      "handler": "auto-auction.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/auto-auctions",
+      "handler": "auto-auction.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/auto-auctions/:id",
+      "handler": "auto-auction.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/auto-auctions/:id",
+      "handler": "auto-auction.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

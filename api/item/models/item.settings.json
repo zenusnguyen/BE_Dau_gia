@@ -59,10 +59,6 @@
     },
     "priceStep": {
       "type": "float"
-    },
-    "hasAutoAuction": {
-      "type": "boolean",
-      "default": false
     }
   }
 }
