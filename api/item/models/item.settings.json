@@ -2,7 +2,8 @@
   "kind": "collectionType",
   "collectionName": "items",
   "info": {
-    "name": "Item"
+    "name": "Item",
+    "description": ""
   },
   "options": {
     "increments": true,
@@ -11,44 +12,17 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "Name": {
-      "type": "string"
-    },
-    "startPrice": {
-      "type": "float"
-    },
     "currentPrice": {
       "type": "float"
     },
     "maxPrice": {
       "type": "float"
     },
-    "Image": {
-      "collection": "file",
-      "via": "related",
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos"
-      ],
-      "plugin": "upload",
-      "required": false,
-      "pluginOptions": {}
-    },
-    "ownerID": {
-      "type": "richtext"
-    },
     "rating": {
       "type": "float"
     },
-    "currentBuyerID": {
+    "currentOrderId": {
       "type": "string"
-    },
-    "postTime": {
-      "type": "datetime"
-    },
-    "endTime": {
-      "type": "datetime"
     },
     "categoryID": {
       "type": "string"
@@ -58,6 +32,33 @@
     },
     "status": {
       "type": "string"
+    },
+    "images": {
+      "type": "json"
+    },
+    "view": {
+      "type": "integer"
+    },
+    "subCategoryId": {
+      "type": "string"
+    },
+    "postingDate": {
+      "type": "datetime"
+    },
+    "ownerId": {
+      "type": "string"
+    },
+    "currentBidderId": {
+      "type": "string"
+    },
+    "autoRenew": {
+      "type": "boolean"
+    },
+    "isAllUser": {
+      "type": "boolean"
+    },
+    "priceStep": {
+      "type": "float"
     }
   }
 }

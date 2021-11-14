@@ -8,7 +8,6 @@ const { parseMultipartData, sanitizeEntity } = require("strapi-utils");
 
 module.exports = {
   async find(ctx) {
-    console.log("ctx: ", ctx);
     let entities;
     if (ctx.query._q) {
       entities = await strapi.services.item.search(ctx.query);
@@ -19,5 +18,33 @@ module.exports = {
     return entities.map((entity) =>
       sanitizeEntity(entity, { model: strapi.models.item })
     );
+  },
+
+  async count(ctx) {
+    if (ctx.query._q) {
+      return strapi.services.item.countSearch(ctx.query);
+    }
+    return strapi.services.item.count(ctx.query);
+  },
+
+  async findOne(ctx) {
+    const { id } = ctx.params;
+
+    const entity = await strapi.services.item.findOne({
+      id: id,
+    });
+
+    return sanitizeEntity(entity, { model: strapi.models.item });
+  },
+
+  async search(ctx) {
+    const { searchWord } = ctx.params;
+    const entity = {};
+    return sanitizeEntity(entity, { model: strapi.models.item });
+  },
+
+  async getCountSearch(ctx) {
+    const { searchWord } = ctx.params;
+    return sanitizeEntity(length, { model: strapi.models.item });
   },
 };

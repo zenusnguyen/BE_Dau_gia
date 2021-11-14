@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/licensings",
+      "handler": "licensing.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/licensings/count",
+      "handler": "licensing.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/licensings/:id",
+      "handler": "licensing.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/licensings",
+      "handler": "licensing.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/licensings/:id",
+      "handler": "licensing.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/licensings/:id",
+      "handler": "licensing.delete",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "kind": "collectionType",
+  "collectionName": "auto_auctions",
+  "info": {
+    "name": "autoAuction",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "productId": {
+      "type": "string"
+    },
+    "buyerId": {
+      "type": "string"
+    },
+    "priceStep": {
+      "type": "float"
+    },
+    "status": {
+      "type": "string"
+    }
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "kind": "collectionType",
+  "collectionName": "price_histories",
+  "info": {
+    "name": "PriceHistory",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "time": {
+      "type": "datetime"
+    },
+    "price": {
+      "type": "integer"
+    },
+    "productId": {
+      "type": "string"
+    },
+    "bidderId": {
+      "type": "string"
+    },
+    "buyer": {
+      "type": "string"
+    },
+    "buyerName": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string"
+    }
+  }
+}

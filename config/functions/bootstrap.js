@@ -20,10 +20,79 @@ module.exports = () => {
   });
 
   io.on("connection", function (socket) {
-    socket.on("join", ({ username, room }) => {
-      console.log("user connected");
-      console.log("username is ", username);
-      console.log("room is...", room);
+    socket.on("priceChange", async (data) => {
+      let entity = await strapi.query("auto-auction").find({
+        productId: data?.productId,
+      });
+      var product = await strapi.services.item.findOne({
+        id: data?.productId,
+        status: "processing",
+      });
+      if (entity?.length > 0) {
+        while (product?.status == "processing") {
+          // await Promise.all(
+          // entity.map(async (el) => {
+          for (let i = 0; i < entity?.length; i++) {
+            product = await strapi.services.item.findOne({
+              id: entity[i]?.productId,
+              status: "processing",
+            });
+            if (
+              product?.maxPrice ==
+              product?.currentPrice + product?.priceStep
+            ) {
+              //sold product
+              await strapi.services.item.update(
+                { id: entity[i]?.productId },
+                {
+                  currentPrice: product?.currentPrice + product?.priceStep,
+                  status: "sold",
+                }
+              );
+              // create price history
+              const buyer = await strapi
+                .query("user", "users-permissions")
+                .findOne({ id: entity[i]?.buyerId });
+              await strapi.query("price-history").create({
+                time: Date.now(),
+                productId: entity[i]?.productId,
+                buyer: entity[i]?.buyerId,
+                buyerName: buyer?.username || buyer?.name,
+                type: "sold",
+                bidderId: product?.ownerId,
+                price: product?.currentPrice + product?.priceStep,
+              });
+            } else {
+              // update price
+              await strapi.services.item.update(
+                { id: entity[i]?.productId },
+                { currentPrice: product?.currentPrice + product?.priceStep }
+              );
+              // create price history
+              const buyer = await strapi
+                .query("user", "users-permissions")
+                .findOne({ id: entity[i]?.buyerId });
+              await strapi.query("price-history").create({
+                time: Date.now(),
+                productId: entity[i]?.productId,
+                buyer: entity[i]?.buyerId,
+                buyerName: buyer?.username || buyer?.name,
+                type: "auction",
+                bidderId: product?.ownerId,
+                price: product?.currentPrice + product?.priceStep,
+              });
+            }
+          }
+          socket.broadcast.emit("priceChange", { data });
+          socket.emit("priceChange", { data });
+        }
+        // setTimeout(() => {
+        //   socket.broadcast.emit("priceChange", { data });
+        // }, 3000);
+      } else {
+        socket.emit("priceChange", { data });
+        socket.broadcast.emit("priceChange", { data });
+      }
     });
   });
 };

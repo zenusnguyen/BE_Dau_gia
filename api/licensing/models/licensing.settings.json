@@ -1,0 +1,28 @@
+{
+  "kind": "collectionType",
+  "collectionName": "licensings",
+  "info": {
+    "name": "licensing",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "bidderId": {
+      "type": "string"
+    },
+    "accept": {
+      "type": "boolean"
+    },
+    "time": {
+      "type": "datetime"
+    },
+    "status": {
+      "type": "string"
+    }
+  }
+}

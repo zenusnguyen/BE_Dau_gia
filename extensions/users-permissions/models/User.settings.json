@@ -64,6 +64,9 @@
     },
     "type": {
       "type": "string"
+    },
+    "score": {
+      "type": "integer"
     }
   }
 }
