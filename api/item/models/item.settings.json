@@ -55,7 +55,8 @@
       "type": "boolean"
     },
     "isAllUser": {
-      "type": "boolean"
+      "type": "boolean",
+      "default": false
     },
     "priceStep": {
       "type": "float"

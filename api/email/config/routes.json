@@ -1,0 +1,12 @@
+{
+  "routes": [
+    {
+      "method": "post",
+      "path": "/getotp-verify",
+      "handler": "email.sendMailVerify",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

@@ -26,6 +26,13 @@
     },
     "dateOfBirth": {
       "type": "date"
+    },
+    "role": {
+      "type": "string"
+    },
+    "appRole": {
+      "type": "string",
+      "default": "buyer"
     }
   }
 }
