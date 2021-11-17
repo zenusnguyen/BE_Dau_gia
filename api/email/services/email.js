@@ -6,77 +6,78 @@
  */
 
 module.exports = {
-  async sendWinnerBidderMail(email, content) {
+  async sendWinnerBidderMail(data) {
     try {
       const sendMail = await strapi.plugins["email"].services.email.send({
         to: email,
-        from: "web2020hcmus@gmail.com",
+        from: "jzay.noreply@gmail.com",
         subject: "Jzay~",
         text: `Chúc mừng bạn đã đấu giá thành công sản phẩm ${content?.product?.name} với mức giá ${content?.product?.currentPrice} `,
       });
     } catch (error) {}
   },
-  async sendRejectNotification(email, content) {
+  async sendRejectNotification(data) {
     try {
       const sendMail = await strapi.plugins["email"].services.email.send({
         to: email,
-        from: "web2020hcmus@gmail.com",
+        from: "jzay.noreply@gmail.com",
         subject: "Jzay~",
         text: ` `,
       });
     } catch (error) {}
   },
 
-  async sendAuctionFailNotification(email, content) {
+  async sendAuctionFailNotification(data) {
     try {
       const sendMail = await strapi.plugins["email"].services.email.send({
         to: email,
-        from: "web2020hcmus@gmail.com",
+        from: "jzay.noreply@gmail.com",
         subject: "Jzay~",
         text: ` `,
       });
     } catch (error) {}
   },
-  async sendAuctionSuccessNotification(email, content) {
+  async sendAuctionSuccessNotification(data) {
     try {
       const sendMail = await strapi.plugins["email"].services.email.send({
-        to: email,
-        from: "web2020hcmus@gmail.com",
+        to: data?.email,
+        from: "jzay.noreply@gmail.com",
         subject: "Jzay~",
-        text: ` `,
-      });
-    } catch (error) {}
-  },
-
-  async sendSellerNotification(email, content) {
-    try {
-      const sendMail = await strapi.plugins["email"].services.email.send({
-        to: email,
-        from: "web2020hcmus@gmail.com",
-        subject: "Jzay~",
-        text: ` `,
+        text: `Sản phẩm ${data?.product?.title} đã kết thúc ở mức ${data?.product?.currentPrice}`,
       });
     } catch (error) {}
   },
 
-  async sendBidderNotification(email, content) {
+  async sendSellerNotification(data) {
     try {
       const sendMail = await strapi.plugins["email"].services.email.send({
-        to: email,
-        from: "web2020hcmus@gmail.com",
+        to: data?.seller,
+        from: "jzay.noreply@gmail.com",
         subject: "Jzay~",
-        text: ` `,
+        text: `Sản phẩm ${data?.product?.title} đã được đấu giá ở mức ${data?.product?.currentPrice}`,
       });
     } catch (error) {}
   },
 
-  async sendPreBidderNotification(email, content) {
+  async sendBidderNotification(data) {
     try {
       const sendMail = await strapi.plugins["email"].services.email.send({
-        to: email,
-        from: "web2020hcmus@gmail.com",
+        to: data?.bidder,
+        from: "jzay.noreply@gmail.com",
         subject: "Jzay~",
-        text: ` `,
+        text: `Sản phẩm ${data?.product?.title} đã được đấu giá ở mức ${data?.product?.currentPrice}`,
+      });
+    } catch (error) {}
+  },
+
+  async sendPreBidderNotification(data) {
+    console.log("data: ", data);
+    try {
+      const sendMail = await strapi.plugins["email"].services.email.send({
+        to: data?.preBidder,
+        from: "jzay.noreply@gmail.com",
+        subject: "Jzay~",
+        text: `Sản phẩm ${data?.product?.title} đã được người khác đấu giá ở mức ${data?.product?.currentPrice}`,
       });
     } catch (error) {}
   },
@@ -85,7 +86,7 @@ module.exports = {
     try {
       const sendMail = await strapi.plugins["email"].services.email.send({
         to: email,
-        from: "web2020hcmus@gmail.com",
+        from: "jzay.noreply@gmail.com",
         subject: "Jzay~",
         text: ` You are create new account your OTP code is :${otp}`,
       });
