@@ -27,4 +27,35 @@ module.exports = {
     });
     return entity;
   },
+
+  async create(ctx) {
+    let entity;
+    const { productId, price, type } = ctx.request.body;
+
+    if (type === "auction") {
+      await strapi.services.item.update(
+        { id: productId },
+        { currentPrice: price }
+      );
+      if (ctx.is("multipart")) {
+        const { data, files } = parseMultipartData(ctx);
+        entity = await strapi.query("price-history").create(data, { files });
+      } else {
+        entity = await strapi.query("price-history").create(ctx.request.body);
+      }
+      return sanitizeEntity(entity, { model: strapi.models["price-history"] });
+    } else {
+      await strapi.services.item.update(
+        { id: productId },
+        { currentPrice: price, status: "sold" }
+      );
+      if (ctx.is("multipart")) {
+        const { data, files } = parseMultipartData(ctx);
+        entity = await strapi.query("price-history").create(data, { files });
+      } else {
+        entity = await strapi.query("price-history").create(ctx.request.body);
+      }
+      return sanitizeEntity(entity, { model: strapi.models["price-history"] });
+    }
+  },
 };

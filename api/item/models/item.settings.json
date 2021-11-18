@@ -12,9 +12,6 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "startPrice": {
-      "type": "float"
-    },
     "currentPrice": {
       "type": "float"
     },
@@ -39,9 +36,6 @@
     "images": {
       "type": "json"
     },
-    "title": {
-      "type": "string"
-    },
     "view": {
       "type": "integer"
     },
@@ -57,17 +51,15 @@
     "currentBidderId": {
       "type": "string"
     },
-    "priceStep": {
-      "type": "integer"
-    },
-    "endTime": {
-      "type": "datetime"
-    },
     "autoRenew": {
       "type": "boolean"
     },
     "isAllUser": {
-      "type": "boolean"
+      "type": "boolean",
+      "default": false
+    },
+    "priceStep": {
+      "type": "float"
     }
   }
 }

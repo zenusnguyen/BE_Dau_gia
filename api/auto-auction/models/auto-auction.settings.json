@@ -1,8 +1,8 @@
 {
   "kind": "collectionType",
-  "collectionName": "price_histories",
+  "collectionName": "auto_auctions",
   "info": {
-    "name": "PriceHistory",
+    "name": "autoAuction",
     "description": ""
   },
   "options": {
@@ -12,25 +12,16 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "time": {
-      "type": "datetime"
-    },
-    "price": {
-      "type": "integer"
-    },
     "productId": {
       "type": "string"
     },
-    "bidderId": {
+    "buyerId": {
       "type": "string"
     },
-    "buyer": {
-      "type": "string"
+    "priceStep": {
+      "type": "float"
     },
-    "buyerName": {
-      "type": "string"
-    },
-    "type": {
+    "status": {
       "type": "string"
     }
   }

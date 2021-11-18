@@ -9,11 +9,13 @@ const { parseMultipartData, sanitizeEntity } = require("strapi-utils");
 module.exports = {
   async find(ctx) {
     let entities;
+
     if (ctx.query._q) {
       entities = await strapi.services.item.search(ctx.query);
     } else {
       entities = await strapi.services.item.find(ctx.query);
     }
+    console.log("entities: ", entities);
 
     return entities.map((entity) =>
       sanitizeEntity(entity, { model: strapi.models.item })
