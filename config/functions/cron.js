@@ -37,11 +37,9 @@ module.exports = {
     //     credentials: true,
     //   },
     // });
-
-    const products = await strapi.services.item.find({
-      status: "processing",
-    });
-
+    // const products = await strapi.services.item.find({
+    //   status: "processing",
+    // });
     //   Promise.all(
     //     products.map(async (el) => {
     //       const expiredDate = new Date(
@@ -58,7 +56,6 @@ module.exports = {
     //       }
     //     })
     //   );
-
     // Promise.all(
     //   products.map(async (item) => {
     //     let entity = await strapi.query("auto-auction").find({
@@ -71,7 +68,6 @@ module.exports = {
     //           const product = await strapi.services.item.findOne({
     //             id: el?.productId,
     //           });
-
     //           if (product?.maxPrice === el?.currentPrice + el?.priceStep) {
     //             //sold product
     //             await strapi.services.item.update(
@@ -86,7 +82,6 @@ module.exports = {
     //               .query("user", "users-permissions")
     //               .findOne({ id: el?.buyerId });
     //             console.log("buyer: ", buyer);
-
     //             await strapi.query("price-history").create({
     //               time: Date.now(),
     //               productId: el?.productId,
@@ -108,7 +103,6 @@ module.exports = {
     //               .query("user", "users-permissions")
     //               .findOne({ id: el?.buyerId });
     //             console.log("buyer: ", buyer);
-
     //             await strapi.query("price-history").create({
     //               time: Date.now(),
     //               productId: el?.productId,

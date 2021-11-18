@@ -28,7 +28,7 @@ module.exports = () => {
         id: data?.productId,
         status: "processing",
       });
-      if (entity?.length > 0) {
+      if (entity?.length > 1) {
         while (product?.status == "processing") {
           // await Promise.all(
           // entity.map(async (el) => {
@@ -83,14 +83,17 @@ module.exports = () => {
               });
             }
           }
-          socket.broadcast.emit("priceChange", { data });
-          socket.emit("priceChange", { data });
         }
-        // setTimeout(() => {
-        //   socket.broadcast.emit("priceChange", { data });
-        // }, 3000);
+        console.log("???");
+        console.log("data: ", data);
+        socket.broadcast.emit("priceChange", {
+          ...data,
+
+          price: data?.maxPrice,
+        });
+        // socket.emit("priceChange", { data });
       } else {
-        socket.emit("priceChange", { data });
+        // socket.emit("priceChange", { data });
         socket.broadcast.emit("priceChange", { data });
       }
     });
