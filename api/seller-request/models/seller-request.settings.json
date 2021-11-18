@@ -1,9 +1,8 @@
 {
   "kind": "collectionType",
-  "collectionName": "licensings",
+  "collectionName": "seller_requests",
   "info": {
-    "name": "licensing",
-    "description": ""
+    "name": "sellerRequest"
   },
   "options": {
     "increments": true,
@@ -12,22 +11,16 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "bidderId": {
+    "userId": {
       "type": "string"
     },
-    "accept": {
-      "type": "boolean"
-    },
-    "time": {
-      "type": "datetime"
-    },
-    "status": {
+    "userName": {
       "type": "string"
     },
     "email": {
       "type": "string"
     },
-    "userName": {
+    "status": {
       "type": "string"
     }
   }

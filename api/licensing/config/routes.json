@@ -10,6 +10,14 @@
     },
     {
       "method": "GET",
+      "path": "/licensings/?:bidderId?:status",
+      "handler": "licensing.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
       "path": "/licensings/count",
       "handler": "licensing.count",
       "config": {
