@@ -56,6 +56,18 @@
     },
     "currentBidderId": {
       "type": "string"
+    },
+    "priceStep": {
+      "type": "integer"
+    },
+    "endTime": {
+      "type": "datetime"
+    },
+    "autoRenew": {
+      "type": "boolean"
+    },
+    "isAllUser": {
+      "type": "boolean"
     }
   }
 }
