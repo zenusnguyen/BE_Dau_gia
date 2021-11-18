@@ -45,6 +45,7 @@ module.exports = () => {
               await strapi.services.item.update(
                 { id: entity[i]?.productId },
                 {
+                  currentBidderId: entity[i]?.buyerId,
                   currentPrice: product?.currentPrice + product?.priceStep,
                   status: "sold",
                 }
@@ -66,7 +67,10 @@ module.exports = () => {
               // update price
               await strapi.services.item.update(
                 { id: entity[i]?.productId },
-                { currentPrice: product?.currentPrice + product?.priceStep }
+                {
+                  currentPrice: product?.currentPrice + product?.priceStep,
+                  currentBidderId: entity[i]?.buyerId,
+                }
               );
               // create price history
               const buyer = await strapi
@@ -84,8 +88,7 @@ module.exports = () => {
             }
           }
         }
-        console.log("???");
-        console.log("data: ", data);
+
         socket.broadcast.emit("priceChange", {
           ...data,
 
