@@ -41,7 +41,20 @@ module.exports = {
 
   async search(ctx) {
     const { searchWord } = ctx.params;
-    const entity = {};
+    console.log("searchWord:xxxx ", searchWord);
+
+    const category =
+      (await strapi
+        .query("category")
+        .search({ _q: [searchWord], _limit: 20 })) || [];
+
+    const listCategory = category.map((el) => el?.id) || [];
+
+    const entity = await strapi
+      .query("item")
+      .search({ _q: [searchWord, ...listCategory], _limit: 20 });
+
+    console.log("entity: ", entity);
     return sanitizeEntity(entity, { model: strapi.models.item });
   },
 

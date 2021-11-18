@@ -13,16 +13,21 @@
   "pluginOptions": {},
   "attributes": {
     "productId": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "buyerId": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "priceStep": {
-      "type": "float"
+      "type": "float",
+      "private": false,
+      "required": true
     },
     "status": {
-      "type": "string"
+      "type": "string",
+      "required": true
     }
   }
 }
