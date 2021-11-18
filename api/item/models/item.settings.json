@@ -66,6 +66,9 @@
     },
     "startPrice": {
       "type": "float"
+    },
+    "endTime": {
+      "type": "datetime"
     }
   }
 }
