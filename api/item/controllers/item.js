@@ -8,6 +8,7 @@ const { parseMultipartData, sanitizeEntity } = require("strapi-utils");
 
 module.exports = {
   async find(ctx) {
+    console.log("ctx:xxx ", ctx);
     let entities;
 
     if (ctx.query._q) {
@@ -15,10 +16,8 @@ module.exports = {
     } else {
       entities = await strapi.services.item.find(ctx.query);
     }
-
-    return entities.map((entity) =>
-      sanitizeEntity(entity, { model: strapi.models.item })
-    );
+    console.log("entities: ", entities);
+    return entities;
   },
 
   async count(ctx) {
@@ -40,24 +39,22 @@ module.exports = {
 
   async search(ctx) {
     const { searchWord } = ctx.params;
-
     const category =
       (await strapi.query("category").search({ _q: searchWord, _limit: 20 })) ||
       [];
-
     const listCategory = category.map((el) => el?.id) || [];
-
     const entity = await strapi
-
       .query("item")
       .search({ _q: searchWord, _limit: 20 });
-    const entity2 = await strapi
-      .query("item")
-      .search({ _q: listCategory[0], _limit: 20 });
 
-    const unique = [
-      ...new Set([...entity, ...entity2].map((item) => item.age)),
-    ];
+    let entity2 = [];
+    if (listCategory.length > 0) {
+      entity2 = await strapi
+        .query("item")
+        .search({ _q: listCategory[0], _limit: 20 });
+    }
+
+    const unique = [...new Set([...entity, ...entity2].map((item) => item))];
     return sanitizeEntity(unique, {
       model: strapi.models.item,
     });

@@ -69,6 +69,9 @@
     },
     "endTime": {
       "type": "datetime"
+    },
+    "blackList": {
+      "type": "json"
     }
   }
 }

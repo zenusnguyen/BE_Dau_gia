@@ -99,4 +99,32 @@ module.exports = {
       ctx.badRequest("Cannot send email");
     }
   },
+
+  async sendChangeDescriptionNotification(ctx) {
+    const data = ctx.request.body;
+    const listBidder = await strapi.query("price-history").find({
+      productId: data?.product?.id,
+      type: "auction",
+    });
+    console.log("listBidder: ", listBidder);
+
+    try {
+      Promise.all(
+        listBidder.map(async (el) => {
+          const bidder = await strapi
+            .query("user", "users-permissions")
+            .findOne({ id: el?.buyerId });
+          console.log("bidder?.email,: ", bidder?.email);
+          await strapi.services.email.sendChangeDescriptionNotification({
+            email: bidder?.email,
+            product: data?.product,
+          });
+        })
+      );
+
+      return { status: 200 };
+    } catch (err) {
+      ctx.badRequest("Cannot send email");
+    }
+  },
 };

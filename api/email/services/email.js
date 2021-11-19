@@ -82,6 +82,18 @@ module.exports = {
     } catch (error) {}
   },
 
+  async sendChangeDescriptionNotification(data) {
+    console.log("data: ", data);
+    try {
+      const sendMail = await strapi.plugins["email"].services.email.send({
+        to: data?.email,
+        from: "jzay.noreply@gmail.com",
+        subject: "Jzay~",
+        text: `Sản phẩm ${data?.product?.title} đã được cập nhật thông tin`,
+      });
+    } catch (error) {}
+  },
+
   async sendMailVerify(email, otp) {
     try {
       const sendMail = await strapi.plugins["email"].services.email.send({
