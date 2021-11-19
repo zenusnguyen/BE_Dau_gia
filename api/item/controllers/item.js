@@ -42,18 +42,25 @@ module.exports = {
     const { searchWord } = ctx.params;
 
     const category =
-      (await strapi
-        .query("category")
-        .search({ _q: [searchWord], _limit: 20 })) || [];
+      (await strapi.query("category").search({ _q: searchWord, _limit: 20 })) ||
+      [];
 
     const listCategory = category.map((el) => el?.id) || [];
-    console.log("listCategory: ", listCategory);
 
     const entity = await strapi
+
       .query("item")
       .search({ _q: searchWord, _limit: 20 });
-    console.log("entity: ", entity);
-    return sanitizeEntity(entity, { model: strapi.models.item });
+    const entity2 = await strapi
+      .query("item")
+      .search({ _q: listCategory[0], _limit: 20 });
+
+    const unique = [
+      ...new Set([...entity, ...entity2].map((item) => item.age)),
+    ];
+    return sanitizeEntity(unique, {
+      model: strapi.models.item,
+    });
   },
 
   async getCountSearch(ctx) {
