@@ -28,7 +28,7 @@ module.exports = () => {
         id: data?.productId,
         status: "processing",
       });
-      if (entity?.length > 0) {
+      if (entity?.length > 1) {
         while (product?.status == "processing") {
           // await Promise.all(
           // entity.map(async (el) => {
@@ -45,6 +45,7 @@ module.exports = () => {
               await strapi.services.item.update(
                 { id: entity[i]?.productId },
                 {
+                  currentBidderId: entity[i]?.buyerId,
                   currentPrice: product?.currentPrice + product?.priceStep,
                   status: "sold",
                 }
@@ -66,7 +67,10 @@ module.exports = () => {
               // update price
               await strapi.services.item.update(
                 { id: entity[i]?.productId },
-                { currentPrice: product?.currentPrice + product?.priceStep }
+                {
+                  currentPrice: product?.currentPrice + product?.priceStep,
+                  currentBidderId: entity[i]?.buyerId,
+                }
               );
               // create price history
               const buyer = await strapi
@@ -83,14 +87,16 @@ module.exports = () => {
               });
             }
           }
-          socket.broadcast.emit("priceChange", { data });
-          socket.emit("priceChange", { data });
         }
-        // setTimeout(() => {
-        //   socket.broadcast.emit("priceChange", { data });
-        // }, 3000);
+
+        socket.broadcast.emit("priceChange", {
+          ...data,
+
+          price: data?.maxPrice,
+        });
+        // socket.emit("priceChange", { data });
       } else {
-        socket.emit("priceChange", { data });
+        // socket.emit("priceChange", { data });
         socket.broadcast.emit("priceChange", { data });
       }
     });

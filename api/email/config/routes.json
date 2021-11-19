@@ -1,0 +1,68 @@
+{
+  "routes": [
+    {
+      "method": "post",
+      "path": "/getotp-verify",
+      "handler": "email.sendMailVerify",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "post",
+      "path": "/sendWinnerBidderMail",
+      "handler": "email.sendWinnerBidderMail",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "post",
+      "path": "/sendRejectNotification",
+      "handler": "email.sendRejectNotification",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "post",
+      "path": "/sendAuctionFailNotification",
+      "handler": "email.sendAuctionFailNotification",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "post",
+      "path": "/sendAuctionSuccessNotification",
+      "handler": "email.sendAuctionSuccessNotification",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "post",
+      "path": "/sendSellerNotification",
+      "handler": "email.sendSellerNotification",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "post",
+      "path": "/sendBidderNotification",
+      "handler": "email.sendBidderNotification",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "post",
+      "path": "/sendPreBidderNotification",
+      "handler": "email.sendPreBidderNotification",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

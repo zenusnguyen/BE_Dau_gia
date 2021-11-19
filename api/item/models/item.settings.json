@@ -55,10 +55,20 @@
       "type": "boolean"
     },
     "isAllUser": {
-      "type": "boolean"
+      "type": "boolean",
+      "default": false
     },
     "priceStep": {
       "type": "float"
+    },
+    "title": {
+      "type": "string"
+    },
+    "startPrice": {
+      "type": "float"
+    },
+    "endTime": {
+      "type": "datetime"
     }
   }
 }

@@ -1,9 +1,8 @@
 {
   "kind": "collectionType",
-  "collectionName": "user_infos",
+  "collectionName": "seller_requests",
   "info": {
-    "name": "UserInfo",
-    "description": ""
+    "name": "sellerRequest"
   },
   "options": {
     "increments": true,
@@ -15,24 +14,14 @@
     "userId": {
       "type": "string"
     },
-    "score": {
-      "type": "integer"
-    },
-    "username": {
+    "userName": {
       "type": "string"
     },
-    "type": {
+    "email": {
       "type": "string"
     },
-    "dateOfBirth": {
-      "type": "date"
-    },
-    "role": {
+    "status": {
       "type": "string"
-    },
-    "appRole": {
-      "type": "string",
-      "default": "buyer"
     }
   }
 }

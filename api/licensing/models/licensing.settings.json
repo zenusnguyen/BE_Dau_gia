@@ -23,6 +23,12 @@
     },
     "status": {
       "type": "string"
+    },
+    "email": {
+      "type": "string"
+    },
+    "userName": {
+      "type": "string"
     }
   }
 }

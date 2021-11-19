@@ -9,6 +9,7 @@ const { parseMultipartData, sanitizeEntity } = require("strapi-utils");
 module.exports = {
   async find(ctx) {
     let entities;
+
     if (ctx.query._q) {
       entities = await strapi.services.item.search(ctx.query);
     } else {
@@ -39,7 +40,18 @@ module.exports = {
 
   async search(ctx) {
     const { searchWord } = ctx.params;
-    const entity = {};
+
+    const category =
+      (await strapi
+        .query("category")
+        .search({ _q: [searchWord], _limit: 20 })) || [];
+
+    const listCategory = category.map((el) => el?.id) || [];
+
+    const entity = await strapi
+      .query("item")
+      .search({ _q: [searchWord, ...listCategory], _limit: 20 });
+
     return sanitizeEntity(entity, { model: strapi.models.item });
   },
 

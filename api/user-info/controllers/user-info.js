@@ -27,6 +27,7 @@ module.exports = {
         email: user.email,
         score: user.score,
         dateOfBirth: user.dateOfBirth,
+        appRole: user.appRole,
       };
     });
 

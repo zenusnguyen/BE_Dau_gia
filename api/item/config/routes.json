@@ -10,7 +10,7 @@
     },
     {
       "method": "GET",
-      "path": "/items/search/:searchWord/page/:pageNumber",
+      "path": "/items/search/:searchWord",
       "handler": "item.search",
       "config": {
         "policies": []
