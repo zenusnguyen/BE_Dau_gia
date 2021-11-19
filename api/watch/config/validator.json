@@ -1,0 +1,21 @@
+{
+  "kind": "collectionType",
+  "collectionName": "watches",
+  "info": {
+    "name": "watch"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "bidderId": {
+      "type": "string"
+    },
+    "productId": {
+      "type": "string"
+    }
+  }
+}
