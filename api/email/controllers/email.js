@@ -9,6 +9,7 @@ const randomOTP = require("../../../helpers/genaratorOTP");
 
 module.exports = {
   async sendMailWinnerEmail(ctx) {
+    const data = ctx.request.body;
     try {
       await strapi.services.email.sendMail(data);
     } catch (err) {
@@ -30,6 +31,7 @@ module.exports = {
     }
   },
   async sendWinnerBidderMail(ctx) {
+    const data = ctx.request.body;
     try {
       const sendMail = await strapi.services.email.sendWinnerBidderMail(data);
       return { status: 200 };
@@ -38,6 +40,7 @@ module.exports = {
     }
   },
   async sendRejectNotification(ctx) {
+    const data = ctx.request.body;
     try {
       const sendMail = await strapi.services.email.sendRejectNotification(data);
       return { status: 200 };
