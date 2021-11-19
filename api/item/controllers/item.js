@@ -8,7 +8,6 @@ const { parseMultipartData, sanitizeEntity } = require("strapi-utils");
 
 module.exports = {
   async find(ctx) {
-    console.log("ctx:xxx ", ctx);
     let entities;
 
     if (ctx.query._q) {
@@ -16,7 +15,6 @@ module.exports = {
     } else {
       entities = await strapi.services.item.find(ctx.query);
     }
-    console.log("entities: ", entities);
     return entities;
   },
 

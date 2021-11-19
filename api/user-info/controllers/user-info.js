@@ -54,48 +54,6 @@ module.exports = {
     return sanitizeEntity(entity, { model: strapi.query("user-info").model });
   },
 
-  // async create(ctx) {
-  //   const existingEntry = await strapi
-  //     .query("user", "users-permissions")
-  //     .findOne({ email: ctx.request.body.email });
-
-  //   if (existingEntry) {
-  //     return ctx.badRequest(
-  //       null,
-  //       formatError({
-  //         id: "Auth.form.error.valid",
-  //         message: "Email already exists",
-  //         field: "email",
-  //       })
-  //     );
-  //   }
-
-  //   console.log(ctx.request.body);
-
-  //   const validData = await strapi.entityValidator.validateEntityUpdate(
-  //     strapi.query("user", "users-permissions").model,
-  //     ctx.request.body
-  //   );
-
-  //   console.log(validData);
-
-  //   if (!validData) {
-  //     return ctx.badRequest(
-  //       null,
-  //       formatError({
-  //         id: "Auth.form.error.invalid",
-  //         message: "Info invalid.",
-  //       })
-  //     );
-  //   }
-
-  //   const entry = await strapi
-  //     .query("user", "users-permissions")
-  //     .create(validData);
-
-  //   return entry;
-  // },
-
   async update(ctx) {
     const existingEntry = await strapi
       .query("user", "users-permissions")
@@ -120,11 +78,12 @@ module.exports = {
   },
 
   async updatePassword(ctx) {
+    const { id } = ctx.params;
     const { oldPassword, newPassword } = ctx.request.body;
 
     const user = await strapi
       .query("user", "users-permissions")
-      .findOne(ctx.query);
+      .findOne({ id });
 
     if (!user) {
       return ctx.badRequest(
@@ -162,5 +121,37 @@ module.exports = {
       .update({ id: user.id }, { password });
 
     return entry;
+  },
+
+  async resetPassword(ctx) {
+    console.log("ctx: ", ctx);
+    const { newPassword } = ctx.request.body;
+    console.log("newPassword: ", newPassword);
+
+    const user = await strapi
+      .query("user", "users-permissions")
+      .findOne(ctx.params);
+    console.log("user: ", user);
+
+    const password = await strapi.plugins[
+      "users-permissions"
+    ].services.user.hashPassword({
+      password: newPassword,
+    });
+
+    const entry = await strapi
+      .query("user", "users-permissions")
+      .update({ id: user._id }, { password });
+
+    await strapi.services.email.sendChangePassword(user?.email, newPassword);
+    return entry;
+  },
+
+  async delete(ctx) {
+    const { id } = ctx.params;
+    const entry = await strapi
+      .query("user", "users-permissions")
+      .delete({ id });
+    return { status: 200 };
   },
 };

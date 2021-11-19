@@ -102,7 +102,19 @@ module.exports = {
         subject: "Jzay~",
         text: ` You are create new account your OTP code is :${otp}`,
       });
-      console.log("sendMail: ", sendMail);
+    } catch (error) {
+      console.log("error: ", error);
+    }
+  },
+
+  async sendChangePassword(email, password) {
+    try {
+      const sendMail = await strapi.plugins["email"].services.email.send({
+        to: email,
+        from: "jzay.noreply@gmail.com",
+        subject: "Jzay~",
+        text: ` Tài khoản của bạn đã được cập nhật mật khẩu, mật khẩu mới là :${password}`,
+      });
     } catch (error) {
       console.log("error: ", error);
     }
