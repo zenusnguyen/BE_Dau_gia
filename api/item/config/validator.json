@@ -1,0 +1,74 @@
+{
+  "kind": "collectionType",
+  "collectionName": "items",
+  "info": {
+    "name": "Item",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "currentPrice": {
+      "type": "float"
+    },
+    "maxPrice": {
+      "type": "float"
+    },
+    "rating": {
+      "type": "float"
+    },
+    "currentOrderId": {
+      "type": "string"
+    },
+    "categoryID": {
+      "type": "string"
+    },
+    "description": {
+      "type": "richtext"
+    },
+    "status": {
+      "type": "string"
+    },
+    "images": {
+      "type": "json"
+    },
+    "view": {
+      "type": "integer"
+    },
+    "subCategoryId": {
+      "type": "string"
+    },
+    "postingDate": {
+      "type": "datetime"
+    },
+    "ownerId": {
+      "type": "string"
+    },
+    "currentBidderId": {
+      "type": "string"
+    },
+    "autoRenew": {
+      "type": "boolean"
+    },
+    "isAllUser": {
+      "type": "boolean",
+      "default": false
+    },
+    "priceStep": {
+      "type": "float"
+    },
+    "title": {
+      "type": "string"
+    },
+    "startPrice": {
+      "type": "float"
+    },
+    "endTime": {
+      "type": "datetime"
+    }
+  }
+}

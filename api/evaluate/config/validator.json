@@ -1,0 +1,37 @@
+{
+  "kind": "collectionType",
+  "collectionName": "evaluates",
+  "info": {
+    "name": "evaluate",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "senderId": {
+      "type": "string"
+    },
+    "receiverId": {
+      "type": "string"
+    },
+    "content": {
+      "type": "string"
+    },
+    "score": {
+      "type": "integer"
+    },
+    "time": {
+      "type": "datetime"
+    },
+    "productId": {
+      "type": "string"
+    },
+    "senderName": {
+      "type": "string"
+    }
+  }
+}

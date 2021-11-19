@@ -1,0 +1,38 @@
+{
+  "kind": "collectionType",
+  "collectionName": "user_infos",
+  "info": {
+    "name": "UserInfo",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "userId": {
+      "type": "string"
+    },
+    "score": {
+      "type": "integer"
+    },
+    "username": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string"
+    },
+    "dateOfBirth": {
+      "type": "date"
+    },
+    "role": {
+      "type": "string"
+    },
+    "appRole": {
+      "type": "string",
+      "default": "buyer"
+    }
+  }
+}

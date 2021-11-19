@@ -1,0 +1,27 @@
+{
+  "kind": "collectionType",
+  "collectionName": "seller_requests",
+  "info": {
+    "name": "sellerRequest"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "userId": {
+      "type": "string"
+    },
+    "userName": {
+      "type": "string"
+    },
+    "email": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string"
+    }
+  }
+}

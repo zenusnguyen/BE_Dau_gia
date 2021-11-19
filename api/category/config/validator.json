@@ -1,0 +1,25 @@
+{
+  "kind": "collectionType",
+  "collectionName": "categories",
+  "info": {
+    "name": "category",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "subCategory": {
+      "type": "json"
+    },
+    "name": {
+      "type": "string"
+    },
+    "image": {
+      "type": "json"
+    }
+  }
+}
