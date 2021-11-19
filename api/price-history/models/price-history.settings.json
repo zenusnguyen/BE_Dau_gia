@@ -32,6 +32,10 @@
     },
     "type": {
       "type": "string"
+    },
+    "isRejected": {
+      "type": "boolean",
+      "default": false
     }
   }
 }

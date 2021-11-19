@@ -15,10 +15,7 @@ module.exports = {
     } else {
       entities = await strapi.services.item.find(ctx.query);
     }
-
-    return entities.map((entity) =>
-      sanitizeEntity(entity, { model: strapi.models.item })
-    );
+    return entities;
   },
 
   async count(ctx) {
@@ -40,19 +37,25 @@ module.exports = {
 
   async search(ctx) {
     const { searchWord } = ctx.params;
-
     const category =
-      (await strapi
-        .query("category")
-        .search({ _q: [searchWord], _limit: 20 })) || [];
-
+      (await strapi.query("category").search({ _q: searchWord, _limit: 20 })) ||
+      [];
     const listCategory = category.map((el) => el?.id) || [];
-
     const entity = await strapi
       .query("item")
-      .search({ _q: [searchWord, ...listCategory], _limit: 20 });
+      .search({ _q: searchWord, _limit: 20 });
 
-    return sanitizeEntity(entity, { model: strapi.models.item });
+    let entity2 = [];
+    if (listCategory.length > 0) {
+      entity2 = await strapi
+        .query("item")
+        .search({ _q: listCategory[0], _limit: 20 });
+    }
+
+    const unique = [...new Set([...entity, ...entity2].map((item) => item))];
+    return sanitizeEntity(unique, {
+      model: strapi.models.item,
+    });
   },
 
   async getCountSearch(ctx) {

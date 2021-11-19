@@ -9,7 +9,7 @@ module.exports = {
   async sendWinnerBidderMail(data) {
     try {
       const sendMail = await strapi.plugins["email"].services.email.send({
-        to: email,
+        to: data?.email,
         from: "jzay.noreply@gmail.com",
         subject: "Jzay~",
         text: `Chúc mừng bạn đã đấu giá thành công sản phẩm ${content?.product?.name} với mức giá ${content?.product?.currentPrice} `,
@@ -17,12 +17,13 @@ module.exports = {
     } catch (error) {}
   },
   async sendRejectNotification(data) {
+    console.log("data: ", data);
     try {
       const sendMail = await strapi.plugins["email"].services.email.send({
-        to: email,
+        to: data?.email,
         from: "jzay.noreply@gmail.com",
         subject: "Jzay~",
-        text: ` `,
+        text: `Bạn đã bị từ chối đấu giá với sản phẩm ${data?.product?.title}`,
       });
     } catch (error) {}
   },
@@ -30,7 +31,7 @@ module.exports = {
   async sendAuctionFailNotification(data) {
     try {
       const sendMail = await strapi.plugins["email"].services.email.send({
-        to: email,
+        to: data?.email,
         from: "jzay.noreply@gmail.com",
         subject: "Jzay~",
         text: ` `,
@@ -82,6 +83,18 @@ module.exports = {
     } catch (error) {}
   },
 
+  async sendChangeDescriptionNotification(data) {
+    console.log("data: ", data);
+    try {
+      const sendMail = await strapi.plugins["email"].services.email.send({
+        to: data?.email,
+        from: "jzay.noreply@gmail.com",
+        subject: "Jzay~",
+        text: `Sản phẩm ${data?.product?.title} đã được cập nhật thông tin`,
+      });
+    } catch (error) {}
+  },
+
   async sendMailVerify(email, otp) {
     try {
       const sendMail = await strapi.plugins["email"].services.email.send({
@@ -90,7 +103,19 @@ module.exports = {
         subject: "Jzay~",
         text: ` You are create new account your OTP code is :${otp}`,
       });
-      console.log("sendMail: ", sendMail);
+    } catch (error) {
+      console.log("error: ", error);
+    }
+  },
+
+  async sendChangePassword(email, password) {
+    try {
+      const sendMail = await strapi.plugins["email"].services.email.send({
+        to: email,
+        from: "jzay.noreply@gmail.com",
+        subject: "Jzay~",
+        text: ` Tài khoản của bạn đã được cập nhật mật khẩu, mật khẩu mới là :${password}`,
+      });
     } catch (error) {
       console.log("error: ", error);
     }
