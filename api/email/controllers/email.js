@@ -116,7 +116,7 @@ module.exports = {
         listBidder.map(async (el) => {
           const bidder = await strapi
             .query("user", "users-permissions")
-            .findOne({ id: el?.buyerId });
+            .findOne({ id: el?.buyer });
           console.log("bidder?.email,: ", bidder?.email);
           await strapi.services.email.sendChangeDescriptionNotification({
             email: bidder?.email,
