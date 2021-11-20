@@ -21,22 +21,35 @@ module.exports = () => {
 
   io.on("connection", function (socket) {
     socket.on("priceChange", async (data) => {
-      let entity = await strapi.query("auto-auction").find({
+      var entity = await strapi.query("auto-auction").find({
         productId: data?.productId,
+        status: "processing",
       });
       var product = await strapi.services.item.findOne({
         id: data?.productId,
         status: "processing",
       });
+      console.log("entity: ", entity);
       if (entity?.length > 1) {
-        while (product?.status == "processing") {
-          // await Promise.all(
-          // entity.map(async (el) => {
+        while (entity?.length > 1) {
+          console.log("here");
           for (let i = 0; i < entity?.length; i++) {
             product = await strapi.services.item.findOne({
               id: entity[i]?.productId,
               status: "processing",
             });
+            if (
+              entity[i]?.maxPrice <
+              product.currentPrice + product?.priceStep
+            ) {
+              // change status
+              await strapi.services["auto-auction"].update(
+                { id: entity[i]?.id },
+                { status: "end" }
+              );
+              return;
+            }
+
             if (
               product?.maxPrice ==
               product?.currentPrice + product?.priceStep
@@ -86,9 +99,12 @@ module.exports = () => {
                 price: product?.currentPrice + product?.priceStep,
               });
             }
+            entity = await strapi.query("auto-auction").find({
+              productId: data?.productId,
+              status: "processing",
+            });
           }
         }
-
         socket.broadcast.emit("priceChange", {
           ...data,
 
