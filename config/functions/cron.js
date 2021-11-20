@@ -20,13 +20,15 @@ module.exports = {
   // }
 
   "*/1 * * * *": async () => {
-    const products = await strapi.services.item.find();
+    const products = await strapi.services.item.find({ status: "processing" });
     Promise.all(
       products.map(async (el) => {
         const current = new Date();
-        if (current < el.endTime) {
+        if (current > el.endTime) {
           // check price history
-          // const priceHistory = await strapi.services.priceHistory.find({buyerId: el.currentBidderId})
+          // const priceHistory = await strapi.services.priceHistory.find({
+          //   buyerId: el.currentBidderId,
+          // });
           if (el?.currentBidderId !== undefined) {
             const bidder = await strapi
               .query("user", "users-permissions")
@@ -44,7 +46,6 @@ module.exports = {
               email: seller?.email,
               product: el,
             });
-
             strapi.services.item.update({ id: el.id }, { status: "sold" });
           } else {
             //send fail email
