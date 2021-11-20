@@ -21,22 +21,33 @@ module.exports = () => {
 
   io.on("connection", function (socket) {
     socket.on("priceChange", async (data) => {
-      let entity = await strapi.query("auto-auction").find({
+      var entity = await strapi.query("auto-auction").find({
         productId: data?.productId,
+        status: "processing",
       });
       var product = await strapi.services.item.findOne({
         id: data?.productId,
         status: "processing",
       });
       if (entity?.length > 1) {
-        while (product?.status == "processing") {
-          // await Promise.all(
-          // entity.map(async (el) => {
+        while (entity?.length > 1) {
           for (let i = 0; i < entity?.length; i++) {
             product = await strapi.services.item.findOne({
               id: entity[i]?.productId,
               status: "processing",
             });
+            if (
+              entity[i]?.maxPrice <
+              product.currentPrice + product?.priceStep
+            ) {
+              // change status
+              await strapi.services["auto-auction"].update(
+                { id: entity[i]?.id },
+                { status: "end" }
+              );
+              return;
+            }
+
             if (
               product?.maxPrice ==
               product?.currentPrice + product?.priceStep
@@ -86,17 +97,58 @@ module.exports = () => {
                 price: product?.currentPrice + product?.priceStep,
               });
             }
+            entity = await strapi.query("auto-auction").find({
+              productId: data?.productId,
+              status: "processing",
+            });
           }
+        }
+
+        // send email notification
+        var product = await strapi.services.item.findOne({
+          id: data?.productId,
+        });
+
+        // send seller notification
+        const seller = await strapi
+          .query("user", "users-permissions")
+          .findOne({ id: product?.ownerId });
+
+        await strapi.services.email.sendSellerNotification({
+          seller: seller?.email,
+          product: product,
+        });
+
+        //send current bidder
+        const currentBidder = await strapi
+          .query("user", "users-permissions")
+          .findOne({ id: product?.currentBidderId });
+        await strapi.services.email.sendBidderNotification({
+          bidder: bidder?.email,
+          product: product,
+        });
+
+        //send preBidder
+        const history = await strapi.query("price-history").find({
+          productId: data?.productId,
+        });
+
+        if (history?.length > 1) {
+          const preBidder = await strapi
+            .query("user", "users-permissions")
+            .findOne({ id: history[1]?.bidderId });
+
+          await strapi.services.email.sendPreBidderNotification({
+            preBidder: preBidder?.email,
+            product: product,
+          });
         }
 
         socket.broadcast.emit("priceChange", {
           ...data,
-
           price: data?.maxPrice,
         });
-        // socket.emit("priceChange", { data });
       } else {
-        // socket.emit("priceChange", { data });
         socket.broadcast.emit("priceChange", { data });
       }
     });

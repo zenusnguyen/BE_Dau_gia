@@ -36,6 +36,9 @@
     "isRejected": {
       "type": "boolean",
       "default": false
+    },
+    "maxPrice": {
+      "type": "float"
     }
   }
 }

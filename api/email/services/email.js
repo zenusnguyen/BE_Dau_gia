@@ -34,7 +34,7 @@ module.exports = {
         to: data?.email,
         from: "jzay.noreply@gmail.com",
         subject: "Jzay~",
-        text: ` `,
+        text: `Sản phẩm ${data?.product?.title} đã kết thúc thất bại ở mức ${data?.product?.currentPrice}`,
       });
     } catch (error) {}
   },
