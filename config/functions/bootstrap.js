@@ -29,10 +29,8 @@ module.exports = () => {
         id: data?.productId,
         status: "processing",
       });
-      console.log("entity: ", entity);
       if (entity?.length > 1) {
         while (entity?.length > 1) {
-          console.log("here");
           for (let i = 0; i < entity?.length; i++) {
             product = await strapi.services.item.findOne({
               id: entity[i]?.productId,
@@ -105,14 +103,52 @@ module.exports = () => {
             });
           }
         }
+
+        // send email notification
+        var product = await strapi.services.item.findOne({
+          id: data?.productId,
+        });
+
+        // send seller notification
+        const seller = await strapi
+          .query("user", "users-permissions")
+          .findOne({ id: product?.ownerId });
+
+        await strapi.services.email.sendSellerNotification({
+          seller: seller?.email,
+          product: product,
+        });
+
+        //send current bidder
+        const currentBidder = await strapi
+          .query("user", "users-permissions")
+          .findOne({ id: product?.currentBidderId });
+        await strapi.services.email.sendBidderNotification({
+          bidder: bidder?.email,
+          product: product,
+        });
+
+        //send preBidder
+        const history = await strapi.query("price-history").find({
+          productId: data?.productId,
+        });
+
+        if (history?.length > 1) {
+          const preBidder = await strapi
+            .query("user", "users-permissions")
+            .findOne({ id: history[1]?.bidderId });
+
+          await strapi.services.email.sendPreBidderNotification({
+            preBidder: preBidder?.email,
+            product: product,
+          });
+        }
+
         socket.broadcast.emit("priceChange", {
           ...data,
-
           price: data?.maxPrice,
         });
-        // socket.emit("priceChange", { data });
       } else {
-        // socket.emit("priceChange", { data });
         socket.broadcast.emit("priceChange", { data });
       }
     });
